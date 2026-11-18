@@ -2,7 +2,7 @@ import httpx
 import pytest
 from unittest.mock import patch, Mock
 
-from ha_client import HAClient
+from voice_assistant.ha import HAClient
 
 
 @pytest.fixture
@@ -16,7 +16,7 @@ class TestHAClient:
         assert headers["Authorization"] == "Bearer test_token"
         assert headers["Content-Type"] == "application/json"
 
-    @patch("ha_client.httpx.Client")
+    @patch("voice_assistant.ha.client.httpx.Client")
     def test_turn_on_scene_success(self, mock_client_class, ha_client):
         mock_response = Mock(spec=httpx.Response)
         mock_response.status_code = 200
@@ -35,7 +35,7 @@ class TestHAClient:
         )
         assert response.status_code == 200
 
-    @patch("ha_client.httpx.Client")
+    @patch("voice_assistant.ha.client.httpx.Client")
     def test_turn_on_scene_with_base_url_trailing_slash(self, mock_client_class, ha_client):
         ha_client_with_slash = HAClient(base_url="http://localhost:8123/", token="test_token")
 

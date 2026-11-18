@@ -1,11 +1,11 @@
 import pytest
 import numpy as np
 from unittest.mock import patch, MagicMock
-from stt import STT
+from voice_assistant.speech import STT
 
 
 class TestSTT:
-    @patch("stt.WhisperModel")
+    @patch("voice_assistant.speech.stt.WhisperModel")
     def test_transcribe_returns_text(self, mock_whisper_model):
         mock_model_instance = MagicMock()
         mock_segment = MagicMock()
@@ -20,7 +20,7 @@ class TestSTT:
 
         assert result == "Hyvää huomenta"
 
-    @patch("stt.WhisperModel")
+    @patch("voice_assistant.speech.stt.WhisperModel")
     def test_transcribe_multiple_segments(self, mock_whisper_model):
         mock_model_instance = MagicMock()
         mock_segment1 = MagicMock()
@@ -40,7 +40,7 @@ class TestSTT:
 
         assert result == "Hyvää huomenta"
 
-    @patch("stt.WhisperModel")
+    @patch("voice_assistant.speech.stt.WhisperModel")
     def test_transcribe_with_language_fi(self, mock_whisper_model):
         mock_model_instance = MagicMock()
         mock_segment = MagicMock()

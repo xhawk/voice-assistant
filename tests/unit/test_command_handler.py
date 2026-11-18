@@ -1,5 +1,5 @@
 import pytest
-from command_handler import CommandHandler, CommandResult
+from voice_assistant.ha import CommandHandler, CommandResult
 
 
 class TestCommandHandler:

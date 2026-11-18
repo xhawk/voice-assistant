@@ -2,8 +2,6 @@ import logging
 import numpy as np
 import sounddevice as sd
 
-from stt import STT
-
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -22,18 +20,3 @@ class Recorder:
         )
         sd.wait()
         return audio.tobytes()
-
-
-def main():
-    logger.info("Recording...")
-    recorder = Recorder(duration=3.0)
-    audio_data = recorder.record()
-    logger.info("Recording complete, transcribing...")
-
-    stt = STT()
-    text = stt.transcribe(audio_data)
-    logger.info(f"Transcribed: {text}")
-
-
-if __name__ == "__main__":
-    main()

@@ -1,12 +1,12 @@
 import pytest
 import numpy as np
 from unittest.mock import patch, MagicMock
-from recorder import Recorder
+from voice_assistant.audio import Recorder
 
 
 class TestRecorder:
-    @patch("recorder.sd.rec")
-    @patch("recorder.sd.wait")
+    @patch("voice_assistant.audio.recorder.sd.rec")
+    @patch("voice_assistant.audio.recorder.sd.wait")
     def test_record_returns_bytes(self, mock_wait, mock_rec):
         mock_audio = np.zeros(48000, dtype=np.int16)
         mock_rec.return_value = mock_audio
@@ -17,8 +17,8 @@ class TestRecorder:
         assert isinstance(result, bytes)
         mock_rec.assert_called_once_with(48000, samplerate=16000, channels=1, dtype=np.int16)
 
-    @patch("recorder.sd.rec")
-    @patch("recorder.sd.wait")
+    @patch("voice_assistant.audio.recorder.sd.rec")
+    @patch("voice_assistant.audio.recorder.sd.wait")
     def test_record_custom_duration(self, mock_wait, mock_rec):
         mock_audio = np.zeros(8000, dtype=np.int16)
         mock_rec.return_value = mock_audio
@@ -28,8 +28,8 @@ class TestRecorder:
 
         mock_rec.assert_called_once_with(8000, samplerate=16000, channels=1, dtype=np.int16)
 
-    @patch("recorder.sd.rec")
-    @patch("recorder.sd.wait")
+    @patch("voice_assistant.audio.recorder.sd.rec")
+    @patch("voice_assistant.audio.recorder.sd.wait")
     def test_record_custom_sample_rate(self, mock_wait, mock_rec):
         mock_audio = np.zeros(44100, dtype=np.int16)
         mock_rec.return_value = mock_audio

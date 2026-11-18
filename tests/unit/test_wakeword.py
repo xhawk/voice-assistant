@@ -1,11 +1,11 @@
 import pytest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch, MagicMock, Mock
 import numpy as np
-from wakeword import WakeWord
+from voice_assistant.audio import WakeWord
 
 
 class TestWakeWord:
-    @patch("wakeword.pvporcupine")
+    @patch("voice_assistant.audio.wakeword.pvporcupine")
     def test_init_with_access_key(self, mock_porcupine):
         mock_instance = MagicMock()
         mock_porcupine.create.return_value = mock_instance
@@ -17,7 +17,7 @@ class TestWakeWord:
         assert call_kwargs["access_key"] == "test_key"
         assert "Hei-koti_en_mac_v4_0_0.ppn" in call_kwargs["keyword_paths"][0]
 
-    @patch("wakeword.pvporcupine")
+    @patch("voice_assistant.audio.wakeword.pvporcupine")
     def test_init_default_no_key(self, mock_porcupine):
         mock_instance = MagicMock()
         mock_porcupine.create.return_value = mock_instance
@@ -26,8 +26,8 @@ class TestWakeWord:
 
         mock_porcupine.create.assert_called_once()
 
-    @patch("wakeword.sd.InputStream")
-    @patch("wakeword.pvporcupine")
+    @patch("voice_assistant.audio.wakeword.sd.InputStream")
+    @patch("voice_assistant.audio.wakeword.pvporcupine")
     def test_listen_returns_on_wake_word(self, mock_porcupine, mock_stream):
         mock_instance = MagicMock()
         mock_instance.sample_rate = 16000
@@ -38,7 +38,7 @@ class TestWakeWord:
         mock_stream_instance = MagicMock()
         mock_stream_instance.read.return_value = (mock_audio, True)
         mock_stream.return_value.__enter__ = MagicMock(return_value=mock_stream_instance)
-        mock_stream.return_value.__exit__ = MagicMock(return_value=False)
+        mock_stream.return_value.__exit__ = Mock(return_value=False)
 
         mock_instance.process.return_value = 0
 

@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.11"
 
 [[package]]
@@ -299,6 +299,7 @@ dependencies = [
     { name = "faster-whisper" },
     { name = "httpx" },
     { name = "pvporcupine" },
+    { name = "pytest" },
     { name = "python-dotenv" },
     { name = "sounddevice" },
 ]
@@ -313,6 +314,7 @@ requires-dist = [
     { name = "faster-whisper" },
     { name = "httpx" },
     { name = "pvporcupine" },
+    { name = "pytest", specifier = ">=9.0.2" },
     { name = "pytest", marker = "extra == 'dev'" },
     { name = "python-dotenv" },
     { name = "sounddevice" },

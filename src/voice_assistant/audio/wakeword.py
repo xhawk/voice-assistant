@@ -9,7 +9,10 @@ class WakeWord:
     def __init__(self, access_key: str | None = None):
         if access_key is None:
             access_key = os.getenv("PV_API_KEY")
-        keyword_path = str(Path(__file__).parent / "Hei-koti_en_mac_v4_0_0.ppn")
+        # Model path relative to project root
+        keyword_path = str(
+            Path(__file__).parent.parent.parent.parent.parent / "models" / "porcupine" / "Hei-koti_en_mac_v4_0_0.ppn"
+        )
         self.porcupine = pvporcupine.create(keyword_paths=[keyword_path], access_key=access_key)
 
     def listen(self):

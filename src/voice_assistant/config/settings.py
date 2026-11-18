@@ -13,7 +13,8 @@ class Config:
 
 def load_config(env_path: Path | None = None) -> Config:
     if env_path is None:
-        env_path = Path(__file__).parent / ".env"
+        # Look for .env in project root (3 levels up from this file)
+        env_path = Path(__file__).parent.parent.parent.parent / ".env"
     load_dotenv(env_path)
 
     ha_url = os.getenv("HA_URL")

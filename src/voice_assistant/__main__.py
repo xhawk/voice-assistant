@@ -1,10 +1,8 @@
 import logging
-from config import load_config
-from ha_client import HAClient
-from command_handler import CommandHandler, CommandResult
-from wakeword import WakeWord
-from recorder import Recorder
-from stt import STT
+from voice_assistant.config import load_config
+from voice_assistant.ha import HAClient, CommandHandler, CommandResult
+from voice_assistant.audio import WakeWord, Recorder
+from voice_assistant.speech import STT
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

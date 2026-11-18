@@ -32,13 +32,13 @@ Required environment variables:
 sudo apt-get install portaudio19-dev
 
 # Download Linux (ARM64) wake word model from Picovoice console
-# Replace Hei-koti_en_mac_v4_0_0.ppn with Linux version
+# Place it in models/porcupine/Hei-koti_en_mac_v4_0_0.ppn
 ```
 
 ## Run
 
 ```bash
-uv run python main.py
+uv run python -m voice_assistant
 ```
 
 ### Raspberry Pi Performance Tip
@@ -46,19 +46,25 @@ uv run python main.py
 Use "tiny" model for faster STT inference:
 
 ```python
-# In main.py or stt.py
+# In src/voice_assistant/speech/stt.py
 stt = STT(model_size="tiny")
 ```
 
 ## Project Structure
 
-- `main.py` - Main entry point
-- `config.py` - Configuration loader
-- `ha_client.py` - Home Assistant API client
-- `wakeword.py` - Wake word detection
-- `recorder.py` - Audio recorder
-- `stt.py` - Speech-to-text
-- `command_handler.py` - Command routing
+```
+voice_assistant/
+├── src/voice_assistant/           # Main package
+│   ├── config/                   # Configuration management
+│   ├── ha/                       # Home Assistant integration
+│   ├── audio/                    # Audio capture and detection
+│   └── speech/                   # Speech processing
+├── models/                        # ML models and binary assets (gitignored)
+│   └── porcupine/                # Porcupine wake word model files
+├── tests/                        # Test suite
+│   ├── unit/                     # Unit tests
+│   └── integration/              # Integration tests
+```
 
 ## Test
 
@@ -69,4 +75,3 @@ uv run pytest
 ## TODO
 
 - [ ] Docker containerization
-
